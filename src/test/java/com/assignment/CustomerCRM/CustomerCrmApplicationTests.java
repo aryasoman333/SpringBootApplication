@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class CustomerCrmApplicationTests {
 
 	@Test
-	void contextLoads() {
+	public void testGetCustomerById() {
+		
 	}
 
 }
