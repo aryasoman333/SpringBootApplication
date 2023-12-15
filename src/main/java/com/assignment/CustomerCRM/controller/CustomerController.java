@@ -4,34 +4,33 @@ package com.assignment.CustomerCRM.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import com.assignment.CustomerCRM.model.Customer;
+import com.assignment.CustomerCRM.service.CustomerService;
+import com.assignment.CustomerCRM.service.impl.CustomerServiceImpl;
 
 @RestController
 @RequestMapping("v1/customer")
 public class CustomerController {
 	
-	//in-memory storage for customers
-	private int customerId;
-	List<Integer> customerList = new ArrayList<>();
+	@Autowired
+	private CustomerService customerService;
 	
 	@GetMapping("/{customerId}")
-	public String getCustomerById(Integer custId) {
-		customerList.add(custId);
-		return "Customer added" + custId;
-		//return customerList.get(customerId);
-		//System.out.println("Customer added" + customerId);
+	public Customer getCustomerById(int custId) {
+		return customerService.getCustomerById(custId);
 	}
 	
 	@PostMapping
-	public void addCustomer(Integer customerId) {
-		customerList.add(customerId);
-		System.out.println("Customer added");
+	public void createCustomer(int custId, String custName) {
+		customerService.createCustomer(custId, custName);
 	}
 	
 	@DeleteMapping("/{customerId}")
-	public void deleteCustomer(Integer customerId) {
-		customerList.remove(customerId);
-		System.out.println("Customer removed");
+	public void deleteCustomer(int custId) {
+		customerService.deleteCustomerbyId(custId);
 	}
 }
 
